@@ -39,7 +39,15 @@ get("/:from_currency/:to_currency") do
   @original_currency = params.fetch("from_currency")
   @destination_currency = params.fetch("to_currency")
 
-  api_url_fx = "https://api.exchangerate.host/list?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}&from=#{@original_currency}&to=#{@destination_currency}&amount=1"
+  api_url_fx = "https://api.exchangerate.host/convert?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}&from=#{@original_currency}&to=#{@destination_currency}&amount=1"
+
+  require "http"
+  resp = HTTP.get(api_url_fx)
+  raw_resp = resp.to_s
+
+  require "json"
+  parsed_resp = JSON.parse(raw_resp)
+  @conversion_rate = parsed_resp.fetch("result")
 
   erb(:convert_currency)
   

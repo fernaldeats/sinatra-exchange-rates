@@ -1,5 +1,5 @@
-<h1>Convert <%= @original_currency.to_s %> to <%= @destination_currency.to_s %></h1>
+<h1>Convert <%= @original_currency %> to <%= @destination_currency %></h1>
 
-<p>1 <%= @original_currency.to_s %> equals 1 AED.</p>
+<p>1 <%= @original_currency %> equals <%=@conversion_rate%> <%=@destination_currency%>.</p>
 
 <p>Go <a href="/AED">back</a>.</p>
